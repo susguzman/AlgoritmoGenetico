@@ -5,20 +5,29 @@
  */
 package logica;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
- *
+ * 
  * @author Jesus
  */
 public class Individuo {
 
+    //Es el valor de diferencia entre individuo y el padre
     public double difrencia;
-    public int suma, padre;
+    //Suma de los caracteress ascii del individuo
+    public int suma;
+    //Suma de los caracteress ascii del individuo
+    public int padre;
+    //Lista de Strings que representan el numero en binario de cada caracter
     public LinkedList<String> caracteres;
-    public ArrayList<String> lista;
+    //Lista de Strings que representan el numero en binario de cada caracter
 
+    /***
+     * Contructor de la clase
+     * @param padre representa la suma de caracteres ascii del padre
+     * @param cantidad representa la cantidad de caractereres a generar por individuo
+     */
     public Individuo(int padre, int cantidad) {
         caracteres = new LinkedList<>();
         this.padre = padre;
@@ -26,11 +35,20 @@ public class Individuo {
         generarIndividuo(cantidad);
     }
 
+    /***
+     * Construcor de la clase, usado cuando el individuo es resultado de un cruze
+     * @param uno individuo que va heredar
+     * @param dos individuo que va heredar
+     */
     public Individuo(Individuo uno, Individuo dos) {
         this.padre = uno.padre;
         crearHijo(uno, dos);
     }
 
+    /***
+     * Generar los caracteres aleatorios de un individuo
+     * @param cantidad representa la cantidad de caractereres a generar por individuo
+     */
     private void generarIndividuo(int cantidad) {
         if (caracteres != null) {
             for (int i = 0; i < cantidad; i++) {
@@ -40,6 +58,10 @@ public class Individuo {
         }
     }
 
+    /***
+     * Simula la mutacion de un individuo
+     * @return si se logra mutar regresa true, sino false
+     */
     public boolean mutar() {
         int intentos = 0;
 
@@ -78,6 +100,11 @@ public class Individuo {
         return false;
     }
 
+    /***
+     * Crear el hijo apartir de dos individuos
+     * @param uno individuo a heredar
+     * @param dos individuo a heredar 
+     */
     private void crearHijo(Individuo uno, Individuo dos) {
         //Calculando cantidades        
         int cantidad_uno = (int) Math.floor(Math.random() * (uno.caracteres.size() - 0 + 1) + 0);
